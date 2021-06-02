@@ -25,6 +25,7 @@ expo install & expo start --ios
 
 - There is a thin wrapper function component which mocks Camera functionality.
 - If it's running on Simulator, download an image from placeholder generator sites.
+  - You can find your favorite place holder generator from https://loremipsum.io/21-of-the-best-placeholder-image-generators/  
 - Randomly change the size of image to fetch in order to get different types of an image
 
 ```
