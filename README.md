@@ -1,5 +1,7 @@
 # React Native Simulator Camera
 
+https://user-images.githubusercontent.com/6277118/120438583-69772b80-c336-11eb-96d6-78f49d6fa903.mov
+
 ## What's this?
 
 - This React Native project provides a way to mock Camera functionality on iOS Simulator
