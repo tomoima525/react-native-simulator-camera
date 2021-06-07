@@ -1,13 +1,8 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
 import { PermissionStatus } from "expo-camera";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 
 import Shutter from "src/components/Shutter";
 import Layout from "src/constants/Layout";
@@ -55,13 +50,14 @@ interface Props {
   navigation: StackNavigationProps<"Camera">;
 }
 
-const Camera = forwardRef<CameraComponentRef, Props>((props, ref) => {
+const Camera = (props: Props) => {
   const { navigation } = props;
   const cameraRef = useRef<CameraRef | null>(null);
   const [permission, setPermission] = useState<PermissionStatus>(
     PermissionStatus.UNDETERMINED
   );
   const [cameraReady, setCameraReady] = useState(false);
+
   useEffect(() => {
     (async () => {
       const { status } = await requestCameraPermission();
@@ -81,10 +77,13 @@ const Camera = forwardRef<CameraComponentRef, Props>((props, ref) => {
     }
   };
 
-  useImperativeHandle(ref, () => ({
-    pausePreview,
-    resumePreview,
-  }));
+  useFocusEffect(
+    useCallback(() => {
+      resumePreview();
+
+      return () => pausePreview();
+    }, [])
+  );
 
   const handleCameraReady = () => {
     setCameraReady(true);
@@ -115,6 +114,6 @@ const Camera = forwardRef<CameraComponentRef, Props>((props, ref) => {
       </View>
     </SafeAreaView>
   );
-});
+};
 
 export default Camera;
