@@ -13,7 +13,7 @@ import {
 
 const mockDLUrl = () => {
   const size = Math.ceil(Math.random() * 6) * 120;
-  return `https://fillmurray.com/${size}/${size}`;
+  return `https://www.fillmurray.com/${size}/${size}`;
 };
 
 export type CameraType = "back" | "front";
@@ -47,9 +47,7 @@ const randomString = () => {
 /**
  * Camera Wrapper to support simulator
  */
-const CameraWrapper: React.ForwardRefExoticComponent<
-  CameraProps & React.RefAttributes<CameraRef>
-> = forwardRef<CameraRef, CameraProps>((props, ref) => {
+const CameraWrapper = forwardRef<CameraRef, CameraProps>((props, ref) => {
   const cameraRef = React.useRef<Camera | null>(null);
   const isEmulator = !DeviceInfo.isDevice;
   const { style, onCameraReady, type } = props;
