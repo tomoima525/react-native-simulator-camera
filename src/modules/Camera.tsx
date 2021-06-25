@@ -13,7 +13,7 @@ import {
 
 const mockDLUrl = () => {
   const size = Math.ceil(Math.random() * 6) * 120;
-  return `https://www.fillmurray.com/${size}/${size}`;
+  return `https://baconmockup.com/${size}/${size}`;
 };
 
 export type CameraType = "back" | "front";
